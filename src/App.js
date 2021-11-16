@@ -1,9 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function App() {
   const [toDoList, setToDoList] = useState([]);
   const [newTask, setNewTask] = useState("");
-  let _task = "";
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setToDoList((arr) => [...arr, { task: newTask, status: false }]);
+    setNewTask("");
+  }
+
+  function handleChange(event) {
+    setNewTask(event.target.value);
+  }
 
   return (
     <div>
@@ -14,14 +23,10 @@ function App() {
           </p>
         );
       })}
-      <form
-        onSubmit={() =>
-          setToDoList((arr) => [...arr, { task: "test", status: false }])
-        }
-      >
+      <form onSubmit={handleSubmit}>
         <label>
-          Name:
-          <input type="text" value={_task} onChange={setNewTask(_task)} />
+          New Task:
+          <input type="text" value={newTask} onChange={handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
