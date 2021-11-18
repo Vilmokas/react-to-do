@@ -14,19 +14,17 @@ function App() {
     setNewTask(event.target.value);
   }
 
-  function handleTaskDone(index) {
-    let tasks = [...toDoList];
-    let task = { ...tasks[index] };
-    task.status = true;
-    tasks[index] = task;
-    setToDoList([...tasks]);
-  }
-
   const onTaskDone = (i) => {
     let tasks = [...toDoList];
     let task = { ...tasks[i] };
     task.status = true;
     tasks[i] = task;
+    setToDoList([...tasks]);
+  };
+
+  const onTaskRemove = (i) => {
+    let tasks = [...toDoList];
+    tasks.splice(i, 1);
     setToDoList([...tasks]);
   };
 
@@ -36,6 +34,7 @@ function App() {
         <p key={index}>
           task: {task.task} | status: {task.status.toString()}
           <button onClick={() => onTaskDone(index)}>✔️</button>
+          <button onClick={() => onTaskRemove(index)}>❌</button>
         </p>
       ))}
       <form onSubmit={handleSubmit}>
