@@ -38,16 +38,16 @@ function App() {
             {toDoList.map((task, index) => (
               <ListGroup.Item key={index}>
                 <Row>
-                  <Col md={8}>
-                    task: {task.task} | status: {task.status.toString()}
-                  </Col>
+                  <Col md={8}>{task.task}</Col>
                   <Col md={{ span: 3, offset: 1 }}>
-                    <Button
-                      variant="outline-success"
-                      onClick={() => onTaskDone(index)}
-                    >
-                      ✔️
-                    </Button>{" "}
+                    {task.status === false && (
+                      <Button
+                        variant="outline-success"
+                        onClick={() => onTaskDone(index)}
+                      >
+                        ✔️
+                      </Button>
+                    )}
                     <Button
                       variant="outline-danger"
                       onClick={() => onTaskRemove(index)}
