@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, ListGroup, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function App() {
   const [toDoList, setToDoList] = useState([]);
@@ -31,12 +32,15 @@ function App() {
   };
 
   return (
-    <Container>
+    <Container id="list">
       <Row className="justify-content-md-center">
         <Col lg={8}>
           <ListGroup>
             {toDoList.map((task, index) => (
-              <ListGroup.Item key={index}>
+              <ListGroup.Item
+                key={index}
+                className={task.status ? "completeTask" : ""}
+              >
                 <Row>
                   <Col md={8}>{task.task}</Col>
                   <Col md={{ span: 3, offset: 1 }}>
@@ -44,6 +48,7 @@ function App() {
                       <Button
                         variant="outline-success"
                         onClick={() => onTaskDone(index)}
+                        className="complete"
                       >
                         ✔️
                       </Button>
